@@ -80,6 +80,17 @@ class ResponseTest extends TestCase
         );
     }
 
+    public function testGetBodyWithoutReason()
+    {
+        $response = Response::fromString(
+            readFixture('http_response_200_no_reason')
+        );
+        $this->assertSame(
+            "Hello World\n",
+            $response->getBody()
+        );
+    }
+
     public function testInvalidResponse()
     {
         $this->setExpectedException(
