@@ -285,7 +285,8 @@ class Response
         // Split headers part to lines
         $headerLines = preg_split('|[\r\n]+|m', $headerLines);
         $status = array_shift($headerLines);
-        if (preg_match("|^HTTP/([\d\.x]+) (\d+) ([^\r\n]+)|", $status, $m)) {
+        // Added a fix for servers that forget to answer with "OK": HTTP/1.1 200 OK
+        if (preg_match("|^HTTP/([\d\.x]+) (\d+) ([^\r\n]*)|", $status, $m)) {
             $version = $m[1];
             $status = $m[2];
             $message = $m[3];
